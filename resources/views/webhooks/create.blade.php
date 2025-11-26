@@ -40,7 +40,8 @@
                         </div>
 
                         <div class="form-check form-switch mb-3">
-                            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ old('is_active', true) ? 'checked' : '' }}>
+                            <input type="hidden" name="is_active" value="0">
+                            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_active">
                                 Active (Enable webhook to receive deployment triggers)
                             </label>
@@ -103,7 +104,8 @@
                     </div>
                     <div class="card-body">
                         <div class="form-check form-switch mb-3">
-                            <input class="form-check-input" type="checkbox" id="generate_ssh_key" name="generate_ssh_key" {{ old('generate_ssh_key', true) ? 'checked' : '' }}>
+                            <input type="hidden" name="generate_ssh_key" value="0">
+                            <input class="form-check-input" type="checkbox" id="generate_ssh_key" name="generate_ssh_key" value="1" {{ old('generate_ssh_key', true) ? 'checked' : '' }}>
                             <label class="form-check-label" for="generate_ssh_key">
                                 <strong>Auto-generate SSH Key Pair</strong>
                                 <div class="form-text mt-1">Automatically generate a unique SSH key for this webhook. You'll need to add the public key to your Git provider.</div>
