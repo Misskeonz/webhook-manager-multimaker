@@ -6,11 +6,11 @@
 
 @section('content')
     <!-- Statistics Cards -->
-    <div class="row mb-4">
+    <div class="row mb-4" style="row-gap: 1rem;">
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Total Webhooks</p>
                             <h3 class="mb-0">{{ $totalWebhooks }}</h3>
@@ -26,7 +26,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Active Webhooks</p>
                             <h3 class="mb-0">{{ $activeWebhooks }}</h3>
@@ -42,7 +42,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Total Deployments</p>
                             <h3 class="mb-0">{{ $totalDeployments }}</h3>
@@ -58,7 +58,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Last 24h</p>
                             <h3 class="mb-0">{{ $recentDeployments->where('created_at', '>=', now()->subDay())->count() }}</h3>
@@ -73,11 +73,11 @@
     </div>
 
     <!-- Additional Statistics Cards -->
-    <div class="row mb-4">
+    <div class="row mb-4" style="row-gap: 1rem;">
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">PHP Websites</p>
                             <h3 class="mb-0">{{ $totalPhpWebsites }}</h3>
@@ -93,7 +93,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Node.js Websites</p>
                             <h3 class="mb-0">{{ $totalNodeWebsites }}</h3>
@@ -109,7 +109,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Databases</p>
                             <h3 class="mb-0">{{ $totalDatabases }}</h3>
@@ -125,7 +125,7 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <p class="text-muted mb-1">Pending Queues</p>
                             <h3 class="mb-0">{{ $pendingQueues }}</h3>

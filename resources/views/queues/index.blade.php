@@ -33,11 +33,11 @@
     </div>
 
     <!-- Statistics Cards -->
-    <div class="row mb-4">
+    <div class="row mb-4" style="row-gap: 1rem;">
         <div class="col-md-3">
-            <div class="card">
+            <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <h6 class="text-muted mb-2">Pending Jobs</h6>
                             <h2 class="mb-0">{{ $statistics['pending_jobs'] }}</h2>
@@ -51,9 +51,9 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card">
+            <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <h6 class="text-muted mb-2">Failed Jobs</h6>
                             <h2 class="mb-0">{{ $statistics['failed_jobs'] }}</h2>
@@ -67,9 +67,9 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card">
+            <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <h6 class="text-muted mb-2">Failed (24h)</h6>
                             <h2 class="mb-0">{{ $statistics['recent_failed'] }}</h2>
@@ -83,9 +83,9 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card">
+            <div class="card stat-card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                         <div>
                             <h6 class="text-muted mb-2">Queue Types</h6>
                             <h2 class="mb-0">{{ count($statistics['jobs_by_queue']) }}</h2>

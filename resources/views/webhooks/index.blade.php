@@ -87,14 +87,15 @@
                                             <a href="{{ route('webhooks.edit', $webhook) }}" class="btn btn-outline-secondary" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <form action="{{ route('webhooks.destroy', $webhook) }}" method="POST" class="d-inline" onsubmit="return confirmDelete('Are you sure you want to delete this webhook?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger" title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button" class="btn btn-outline-danger" title="Delete" 
+                                                    onclick="if(confirmDelete('Are you sure you want to delete this webhook?')) { document.getElementById('delete-form-{{ $webhook->id }}').submit(); }">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
                                         </div>
+                                        <form id="delete-form-{{ $webhook->id }}" action="{{ route('webhooks.destroy', $webhook) }}" method="POST" class="d-none">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

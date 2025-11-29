@@ -7,11 +7,11 @@
 @section('content')
     @if($latestMetric)
         <!-- System Monitoring Cards -->
-        <div class="row mb-4">
+        <div class="row mb-4" style="row-gap: 1rem;">
             <div class="col-md-4">
                 <div class="card stat-card h-100">
-                    <div class="card-body pb-2">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="card-body" style="padding: 1rem !important; padding-bottom: 0.75rem !important;">
+                        <div class="d-flex mb-2" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                             <div>
                                 <p class="text-muted mb-1">CPU Usage</p>
                                 <h3 class="mb-0">{{ number_format($latestMetric->cpu_usage, 1) }}%</h3>
@@ -36,8 +36,8 @@
             
             <div class="col-md-4">
                 <div class="card stat-card h-100">
-                    <div class="card-body pb-2">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="card-body" style="padding: 1rem !important; padding-bottom: 0.75rem !important;">
+                        <div class="d-flex mb-2" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                             <div>
                                 <p class="text-muted mb-1">Memory Usage</p>
                                 <h3 class="mb-0">{{ number_format($latestMetric->memory_usage, 1) }}%</h3>
@@ -64,8 +64,8 @@
             
             <div class="col-md-4">
                 <div class="card stat-card h-100">
-                    <div class="card-body pb-2">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="card-body" style="padding: 1rem !important; padding-bottom: 0.75rem !important;">
+                        <div class="d-flex mb-2" style="flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important;">
                             <div>
                                 <p class="text-muted mb-1">Disk Usage</p>
                                 <h3 class="mb-0">{{ number_format($latestMetric->disk_usage, 1) }}%</h3>
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -251,6 +251,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: {
                     display: true,
                     position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 8,
+                        font: {
+                            size: window.innerWidth < 576 ? 10 : 12
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -265,6 +272,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     beginAtZero: true,
                     max: 100,
                     ticks: {
+                        font: {
+                            size: window.innerWidth < 576 ? 9 : 11
+                        },
                         callback: function(value) {
                             return value + '%';
                         }
@@ -273,7 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 x: {
                     ticks: {
                         maxRotation: 45,
-                        minRotation: 45
+                        minRotation: 45,
+                        font: {
+                            size: window.innerWidth < 576 ? 8 : 10
+                        }
                     }
                 }
             }
@@ -356,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -365,6 +378,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: {
                     display: true,
                     position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 8,
+                        font: {
+                            size: window.innerWidth < 576 ? 10 : 12
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -378,6 +398,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 y: {
                     beginAtZero: true,
                     ticks: {
+                        font: {
+                            size: window.innerWidth < 576 ? 9 : 11
+                        },
                         callback: function(value) {
                             return value.toFixed(1) + ' MB/s';
                         }
@@ -386,7 +409,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 x: {
                     ticks: {
                         maxRotation: 45,
-                        minRotation: 45
+                        minRotation: 45,
+                        font: {
+                            size: window.innerWidth < 576 ? 8 : 10
+                        }
                     }
                 }
             }
@@ -426,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -435,6 +461,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: {
                     display: true,
                     position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 8,
+                        font: {
+                            size: window.innerWidth < 576 ? 10 : 12
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -450,6 +483,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     beginAtZero: true,
                     ticks: {
                         stepSize: 1,
+                        font: {
+                            size: window.innerWidth < 576 ? 9 : 11
+                        },
                         callback: function(value) {
                             return Math.floor(value);
                         }
@@ -458,7 +494,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 x: {
                     ticks: {
                         maxRotation: 45,
-                        minRotation: 45
+                        minRotation: 45,
+                        font: {
+                            size: window.innerWidth < 576 ? 8 : 10
+                        }
                     }
                 }
             }
