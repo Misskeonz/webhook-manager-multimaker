@@ -63,12 +63,12 @@ $WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/certbot
 $WEB_USER ALL=(ALL) NOPASSWD: /snap/bin/certbot
 
 # PHP-FPM Pool Management - Specific versions
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm7.4 -t
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.0 -t
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.1 -t
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.2 -t
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.3 -t
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.4 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm7.4 -t *
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.0 -t *
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.1 -t *
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.2 -t *
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.3 -t *
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.4 -t *
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php7.4-fpm
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.0-fpm
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.1-fpm
