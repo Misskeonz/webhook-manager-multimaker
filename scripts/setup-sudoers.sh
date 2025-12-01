@@ -59,49 +59,77 @@ $WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload nginx
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx
 
 # Certbot - SSL Certificate Management
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/certbot --nginx -d * --non-interactive --agree-tos --email *
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/certbot renew *
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/certbot certificates
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/certbot
+$WEB_USER ALL=(ALL) NOPASSWD: /snap/bin/certbot
 
-# PHP-FPM Pool Management
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm* -t
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php*-fpm
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php*-fpm
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php*-fpm*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chown $WEB_USER:$WEB_USER /var/log/php*-fpm*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/* /etc/php/*/fpm/pool.d/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/php/*/fpm/pool.d/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/php/*/fpm/pool.d/*
+# PHP-FPM Pool Management - Specific versions
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm7.4 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.0 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.1 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.2 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.3 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/php-fpm8.4 -t
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php7.4-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.0-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.1-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.2-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.3-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl reload php8.4-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php7.4-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php8.0-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php8.1-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php8.2-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php8.3-fpm
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/systemctl restart php8.4-fpm
+
+# Directory Management - PHP-FPM logs
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php7.4-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php8.0-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php8.1-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php8.2-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php8.3-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/log/php8.4-fpm[/]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chown -R $WEB_USER?$WEB_USER /var/log/php[78].[0-9]*-fpm[/]*
+
+# File Management - PHP-FPM pool configs
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/7.4/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/8.0/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/8.1/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/8.2/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/8.3/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/php/8.4/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/php/[78].[0-9]*/fpm/pool.d/[a-z]*.conf
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/php/[78].[0-9]*/fpm/pool.d/[a-z]*.conf
 
 # File Management - Nginx Config Files
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/* /etc/nginx/sites-available/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/nginx/sites-available/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/ln -sf /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/nginx/sites-available/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/nginx/sites-enabled/*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/nginx/sites-available/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/nginx/sites-available/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/ln -sf /etc/nginx/sites-available/[a-z]* /etc/nginx/sites-enabled/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/nginx/sites-available/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/nginx/sites-enabled/[a-z]*
 
 # Webroot Directory Management
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/www/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chown -R $WEB_USER:$WEB_USER /var/www/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod -R 755 /var/www/*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /var/www/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chown -R $WEB_USER?$WEB_USER /var/www/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod -R 755 /var/www/[a-z]*
 
 # PM2 Configuration Management (Node.js)
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/mkdir -p /etc/pm2
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 755 /etc/pm2
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/* /etc/pm2/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/pm2/*
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/pm2/*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/cp /tmp/[a-z]* /etc/pm2/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/chmod 644 /etc/pm2/[a-z]*
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/rm -f /etc/pm2/[a-z]*
 
 # PM2 Process Control (Node.js)
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2 start *
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2 stop *
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2 restart *
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2 save
-$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2 jlist
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/pm2
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/local/bin/pm2
 
-# Git Webhook Deployments
+# Git - Allow all git commands
 $WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/git
-$WEB_USER ALL=(ALL) NOPASSWD: /bin/bash
+
+# Bash - For deployment scripts (use with caution)
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/bash /var/www/[a-z]*/deploy.sh
+$WEB_USER ALL=(ALL) NOPASSWD: /bin/bash /var/www/[a-z]*/deployment/deploy.sh
 EOF
 
 # Set proper permissions
@@ -136,10 +164,11 @@ echo ""
 print_info "Allowed commands:"
 echo "  • Nginx management (reload, restart, test)"
 echo "  • SSL certificate management (certbot)"
-echo "  • PHP-FPM pool management"
+echo "  • PHP-FPM pool management (versions 7.4, 8.0-8.4)"
 echo "  • Nginx configuration file management"
 echo "  • PM2 process management (Node.js)"
 echo "  • Git deployments"
+echo "  • Deployment script execution"
 echo ""
 print_info "Security file: $SUDOERS_FILE"
 print_info "Permissions: 0440 (read-only)"

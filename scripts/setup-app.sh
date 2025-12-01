@@ -154,9 +154,16 @@ redirect_stderr=true
 stdout_logfile=APPDIR/storage/logs/scheduler.log
 EOF
 
-# Replace APPDIR placeholder
-sed -i "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-queue.conf
-sed -i "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-scheduler.conf
+# Replace APPDIR placeholder (cross-platform compatible)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    sed -i '' "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-queue.conf
+    sed -i '' "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-scheduler.conf
+else
+    # Linux
+    sed -i "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-queue.conf
+    sed -i "s|APPDIR|$APP_DIR|g" /tmp/git-webhook-scheduler.conf
+fi
 
 # Install supervisor configs if supervisor is installed
 if command -v supervisorctl &> /dev/null; then
