@@ -330,7 +330,7 @@
 
                     @if(config('services.cloudflare.enabled'))
                         <h6 class="mt-3">Cloudflare DNS</h6>
-                        <p class="small">@if($website->dns_status === 'active')DNS A record is synced pointing to {{ $website->server_ip }}.@elseClick "Sync DNS" to create/update the DNS A record in Cloudflare.@endif</p>
+                        <p class="small">@if($website->dns_status === 'active')DNS A record is synced pointing to {{ $website->server_ip }}.@else Click "Sync DNS" to create/update the DNS A record in Cloudflare.@endif</p>
                     @endif
 
                     <h6 class="mt-3">Redeploy</h6>
