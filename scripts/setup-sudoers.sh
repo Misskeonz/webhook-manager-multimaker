@@ -144,6 +144,14 @@ $WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/git
 # Bash - For deployment scripts (use with caution)
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/bash /var/www/[a-z]*/deploy.sh
 $WEB_USER ALL=(ALL) NOPASSWD: /bin/bash /var/www/[a-z]*/deployment/deploy.sh
+
+# UFW Firewall Management
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/ufw
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/sbin/ufw *
+
+# Crontab Management
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/crontab
+$WEB_USER ALL=(ALL) NOPASSWD: /usr/bin/crontab *
 EOF
 
 # Setup PHP-FPM logs
@@ -216,6 +224,8 @@ echo "  • PHP-FPM pool management (versions 7.4, 8.0-8.4)"
 echo "  • Nginx configuration file management"
 echo "  • PM2 process management (Node.js)"
 echo "  • Supervisor process management (queue workers, scheduler)"
+echo "  • UFW firewall management"
+echo "  • Crontab management"
 echo "  • Git deployments"
 echo "  • Deployment script execution"
 echo ""
