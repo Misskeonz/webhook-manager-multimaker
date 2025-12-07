@@ -141,7 +141,6 @@
             border-bottom-color: #5865f2;
         }
         .tabs-container {
-            border-bottom: 1px solid #e5e7eb;
             margin-bottom: 2rem;
         }
         .website-icon {
@@ -268,6 +267,10 @@
                         <div class="info-row">
                             <span class="info-label">Root Path</span>
                             <span class="info-value"><code>{{ $website->root_path }}</code></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Working Directory</span>
+                            <span class="info-value"><code>{{ $website->working_directory ?? '/' }}</code></span>
                         </div>
 
                         <!-- Services Section -->
