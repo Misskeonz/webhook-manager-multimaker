@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AlertController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CloudflareController;
+use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeploymentController;
+use App\Http\Controllers\FirewallController;
+use App\Http\Controllers\LogViewerController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ServerHealthController;
 use App\Http\Controllers\WebhookController;
@@ -87,6 +91,34 @@ Route::middleware('auth')->group(function () {
         ->name('cloudflare.verify-token');
     Route::get('cloudflare/server-ip', [CloudflareController::class, 'getServerIp'])
         ->name('cloudflare.server-ip');
+
+    // Firewall Management
+    Route::get('firewall', [FirewallController::class, 'index'])->name('firewall.index');
+    Route::post('firewall', [FirewallController::class, 'store'])->name('firewall.store');
+    Route::delete('firewall/{firewallRule}', [FirewallController::class, 'destroy'])->name('firewall.destroy');
+    Route::post('firewall/{firewallRule}/toggle', [FirewallController::class, 'toggle'])->name('firewall.toggle');
+    Route::post('firewall/enable', [FirewallController::class, 'enable'])->name('firewall.enable');
+    Route::post('firewall/disable', [FirewallController::class, 'disable'])->name('firewall.disable');
+    Route::post('firewall/reset', [FirewallController::class, 'reset'])->name('firewall.reset');
+
+    // Cron Jobs
+    Route::resource('cron-jobs', CronJobController::class);
+    Route::post('cron-jobs/{cronJob}/toggle', [CronJobController::class, 'toggle'])->name('cron-jobs.toggle');
+
+    // Alerts
+    Route::get('alerts', [AlertController::class, 'index'])->name('alerts.index');
+    Route::get('alerts/create', [AlertController::class, 'create'])->name('alerts.create');
+    Route::post('alerts', [AlertController::class, 'store'])->name('alerts.store');
+    Route::get('alerts/{alertRule}/edit', [AlertController::class, 'edit'])->name('alerts.edit');
+    Route::put('alerts/{alertRule}', [AlertController::class, 'update'])->name('alerts.update');
+    Route::delete('alerts/{alertRule}', [AlertController::class, 'destroy'])->name('alerts.destroy');
+    Route::post('alerts/{alertRule}/toggle', [AlertController::class, 'toggle'])->name('alerts.toggle');
+    Route::post('alerts/{alert}/resolve', [AlertController::class, 'resolve'])->name('alerts.resolve');
+    Route::delete('alerts/{alert}/delete', [AlertController::class, 'deleteAlert'])->name('alerts.delete');
+
+    // Log Viewer
+    Route::get('logs', [LogViewerController::class, 'index'])->name('logs.index');
+    Route::post('logs/clear', [LogViewerController::class, 'clear'])->name('logs.clear');
 });
 
 // Webhook Handler (API endpoint for Git providers - No Auth Required)
