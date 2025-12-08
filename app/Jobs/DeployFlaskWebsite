@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Facades\Log;
+
+class DeployFlaskWebsite implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public function handle(): void
+    {
+        // Path to the deployment script on your server
+        $scriptPath = '/path/to/your/flask_deploy.sh'; 
+
+        // Execute the shell script (this handles the git pull and service restart)
+        $result = Process::timeout(300)->run('bash ' . $scriptPath);
+
+        if ($result->successful()) {
+            Log::info('Flask Deployment Script executed successfully.');
+            // Log details of the output for debugging
+            Log::debug($result->output());
+        } else {
+            Log::error('Flask Deployment Script FAILED.', [
+                'exit_code' => $result->exitCode(),
+                'error' => $result->errorOutput(),
+            ]);
+        }
+    }
+}
